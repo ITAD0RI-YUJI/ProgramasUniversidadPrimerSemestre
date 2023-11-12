@@ -42,19 +42,19 @@ bool tableroRlleno(){ // Verifica si el tablero está vacío o totalmente lleno
     return lleno;
 }
 
-void movimientoTablero(int fichaCompu){
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 3; j++){
-            if(tablero[i][j] == 0){
-                tablero[i][j] = fichaCompu;
-            }
-        }
+void movimientoTablero(){
+    int filaAleatoria = rand() % 3;
+    int columnaAleatoria = rand() % 3;
+
+    while(tablero[filaAleatoria][columnaAleatoria] != 0){
+        filaAleatoria = rand() % 3;
+        columnaAleatoria = rand() % 3;
     }
 
-    // return posicionColocar;
+    tablero[filaAleatoria][columnaAleatoria] = 2;
 }
 
-main(){
+int main(){
     srand(time(NULL));
 
     string nombrePersona;
@@ -119,7 +119,8 @@ main(){
         int numPersona = 0; // Ficha del usuario
 
         if(turno == 0){ // Si el turno el 0 es elturno del computador
-            cout <<"computador" << endl;
+            cout<< "\nMovimiento de "<< nombreComputador<< endl;
+            movimientoTablero();
         }
         else if(turno == 1){ // Si el turno el 1 es elturno de la persona
             do{
