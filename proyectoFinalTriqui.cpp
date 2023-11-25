@@ -7,7 +7,7 @@ using namespace std;
 string nombresComputador[] = {"Asta" , "Itadori" , "Luffy" , "Goku" , "Naruto"}; //Nombres para el computador a la hora de jugar
 int nombreSize = sizeof(nombresComputador)/sizeof(nombresComputador[0]);
 
-char tablero[3][3];
+char tablero[3][3] = {'1','2','3','4','5','6','7','8','9'};
 
 string nombresSelector(){ // Elegir el nombre del PC al azar
     string nombreComputador;
@@ -27,82 +27,151 @@ int lanzarDado(){
     return numeroDado;
 }
 
-bool bloquear(){
-    bool lanzarBloqueo = false;
-
-    for(int i = 0; i < 3; i++){
-        if(((tablero[i][0] == 'O') && (tablero[i][1] == 'O') && (tablero[i][2] == 'O')) || 
-           ((tablero[i][0] == 'O') && (tablero[i][2] == 'O') && (tablero[i][1] == 'O')) ||
-           ((tablero[i][1] == 'O') && (tablero[i][2] == 'O') && (tablero[i][0] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[i][k] != 'O'){
-                    tablero[i][k] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-
-        if(((tablero[0][i] == 'O') && (tablero[1][i] == 'O') && (tablero[2][i] == 'O')) || 
-           ((tablero[0][i] == 'O') && (tablero[2][i] == 'O') && (tablero[1][i] == 'O')) ||
-           ((tablero[1][i] == 'O') && (tablero[2][i] == 'O') && (tablero[0][i] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[k][i] != 'O'){
-                    tablero[k][i] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-        
-        if(((tablero[0][0] == 'O') && (tablero[1][1] == 'O') && (tablero[2][2] == 'O')) || 
-           ((tablero[0][0] == 'O') && (tablero[2][2] == 'O') && (tablero[1][1] == 'O')) ||
-           ((tablero[1][1] == 'O') && (tablero[2][2] == 'O') && (tablero[0][0] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[k][k] != 'O'){
-                    tablero[k][k] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-        
-        if(((tablero[0][2] == 'O') && (tablero[1][1] == 'O') && (tablero[2][0] == 'O')) || 
-           ((tablero[0][2] == 'O') && (tablero[2][0] == 'O') && (tablero[1][1] == 'O')) ||
-           ((tablero[1][1] == 'O') && (tablero[2][0] == 'O') && (tablero[0][2] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[k][k] != 'O'){
-                    tablero[k][k] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-    }
-
-    return lanzarBloqueo; // Lanza "false" por defecto
-}
+// bool bloquear(){
+    
+// }
 
 void movimientoComputador(){
-    int filaAleatoria = rand() % 3;
-    int columnaAleatoria = rand() % 3;
-    bool vacioValidar = true;
+    int filaAleatoria;
+    int columnaAleatoria;
 
-    if((tablero[filaAleatoria][columnaAleatoria] == 'X') || (tablero[filaAleatoria][columnaAleatoria] == 'O')){
-        vacioValidar = false;
-    }
-
-    while(!vacioValidar){
+    do{
         filaAleatoria = rand() % 3;
         columnaAleatoria = rand() % 3;
-
-        if((tablero[filaAleatoria][columnaAleatoria] == 'X') || (tablero[filaAleatoria][columnaAleatoria] == 'O')){
-            vacioValidar = false;
-        } 
-        else {
-            bloquear();
-            vacioValidar = true;
-        }
     }
+    while((tablero[filaAleatoria][columnaAleatoria] == 'X') || (tablero[filaAleatoria][columnaAleatoria] == 'O'));
 
     tablero[filaAleatoria][columnaAleatoria] = 'X';
+}
 
+void validarEspacio(char tableroFunc[3][3]){
+    char posicionPersona = 0;
+
+    int fila;
+    int columna;
+
+    bool espacioVacio = true;
+
+    do{
+        espacioVacio = true;
+        
+        cout<< "\n♧ Ingresa la posición para jugar: ";
+        cin>> posicionPersona;
+
+        switch (posicionPersona)
+        {
+            case '1':
+                fila = 0;
+                columna = 0;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '2':
+                fila = 0;
+                columna = 1;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '3':
+                fila = 0;
+                columna = 2;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '4':
+                fila = 1;
+                columna = 0;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '5':
+                fila = 1;
+                columna = 1;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '6':
+                fila = 1;
+                columna = 2;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '7':
+                fila = 2;
+                columna = 0;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '8':
+                fila = 2;
+                columna = 1;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+            
+            case '9':
+                fila = 2;
+                columna = 2;
+
+                if(tableroFunc[fila][columna] == 'X' || tableroFunc[fila][columna] == 'O'){
+                    cout<< "♧ Esta posición está ocupada, ingresa otra "<< endl;
+
+                    espacioVacio = false;
+                }
+
+            break;
+        }
+    }
+    while(!espacioVacio);
+
+    tableroFunc[fila][columna] = 'O';
 }
 
 int main(){
@@ -130,14 +199,6 @@ int main(){
     cout<< "\nResultado dado "<< nombrePersona<< " : "<< dadoPersona<< endl;
     cout<< "Resultado dado "<< nombreComputador<< " : "<< dadoCompu<< endl;
 
-    char aumentador = '1';
-    for(int i = 0; i < 3; i++){     // Definiendo las posiciones dentro de la matriz (rellenar de 1-9)
-        for(int j = 0; j < 3; j++){
-           tablero[i][j] = aumentador;
-           aumentador += 1;
-        }
-    }
-
     cout<< "\nTablero a jugar: "<< endl;
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -145,7 +206,7 @@ int main(){
         }
         cout<< endl;
     }
-
+    
     //Definiendo quien tendrá el primer turno
     if(dadoPersona > dadoCompu){
         cout<< "\n♧ El primer turno corresponde a "<< nombrePersona<< endl;
@@ -157,24 +218,14 @@ int main(){
     }
 
     for(int i = 0; i < 9; i++){
-        char posicionPersona = '0';
-
         if(turno == 0){
-            cout<< "\nMovimiento de "<< nombreComputador<< endl;
+            cout<< "\n♧ Movimiento de "<< nombreComputador<< endl;
             movimientoComputador();
         }
-        else if(turno == 1){ // Si el turno el 1 es elturno de la persona
-            cout<<"\n♧ Valor donde quieres poner en el tablero "<< nombrePersona<< ": ";
-            cin>> posicionPersona;
-
-            for(int i = 0; i < 3; i++){
-                for(int j = 0; j < 3; j++){
-                    if(tablero[i][j] == posicionPersona){
-                        tablero[i][j] = 'O'; 
-                    }
-                }
-            }
+        else if(turno == 1){ // Si el turno es 1, es el turno de la persona
+            validarEspacio(tablero);
         }
+
         cout<< endl;
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
