@@ -7,91 +7,155 @@ using namespace std;
 string nombresComputador[] = {"Asta" , "Itadori" , "Luffy" , "Goku" , "Naruto"}; //Nombres para el computador a la hora de jugar
 int nombreSize = sizeof(nombresComputador)/sizeof(nombresComputador[0]);
 
-char tablero[3][3] = {'1','2','3','4','5','6','7','8','9'};
+string tablero[3][3] = {"1","2","3","4","5","6","7","8","9"};
+
 
 string nombresSelector(){ // Elegir el nombre del PC al azar
     string nombreComputador;
-    
+
     int indiciAleatorio = rand() % nombreSize;
-    
+
     nombreComputador = nombresComputador[indiciAleatorio];
-    
+
     return nombreComputador;
 }
+
 
 int lanzarDado(){
     int numeroDado = 0;
 
     numeroDado = rand() % 5 + 1;
-    
+
     return numeroDado;
 }
 
-bool bloquear(){
-    bool lanzarBloqueo = false;
-
-    for(int i = 0; i < 3; i++){
-        if(((tablero[i][0] == 'O') && (tablero[i][1] == 'O') && (tablero[i][2] == 'O')) || 
-           ((tablero[i][0] == 'O') && (tablero[i][2] == 'O') && (tablero[i][1] == 'O')) ||
-           ((tablero[i][1] == 'O') && (tablero[i][2] == 'O') && (tablero[i][0] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[i][k] != 'O'){
-                    tablero[i][k] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-
-        if(((tablero[0][i] == 'O') && (tablero[1][i] == 'O') && (tablero[2][i] == 'O')) || 
-           ((tablero[0][i] == 'O') && (tablero[2][i] == 'O') && (tablero[1][i] == 'O')) ||
-           ((tablero[1][i] == 'O') && (tablero[2][i] == 'O') && (tablero[0][i] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[k][i] != 'O'){
-                    tablero[k][i] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-        
-        if(((tablero[0][0] == 'O') && (tablero[1][1] == 'O') && (tablero[2][2] == 'O')) || 
-           ((tablero[0][0] == 'O') && (tablero[2][2] == 'O') && (tablero[1][1] == 'O')) ||
-           ((tablero[1][1] == 'O') && (tablero[2][2] == 'O') && (tablero[0][0] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[k][k] != 'O'){
-                    tablero[k][k] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-        
-        if(((tablero[0][2] == 'O') && (tablero[1][1] == 'O') && (tablero[2][0] == 'O')) || 
-           ((tablero[0][2] == 'O') && (tablero[2][0] == 'O') && (tablero[1][1] == 'O')) ||
-           ((tablero[1][1] == 'O') && (tablero[2][0] == 'O') && (tablero[0][2] == 'O'))){
-            for(int k = 0; k < 3; k++){
-                if(tablero[k][k] != 'O'){
-                    tablero[k][k] = 'X';
-                    return !lanzarBloqueo;
-                }
-            }
-        }
-    }
-
-    return lanzarBloqueo; // Lanza "false" por defecto
-}
 
 void movimientoComputador(){
     int filaAleatoria;
     int columnaAleatoria;
 
-    do{
-        filaAleatoria = rand() % 3;
-        columnaAleatoria = rand() % 3;
+    // Analizando filas 
+    if(tablero[0][0] == "O" && tablero[0][1] == "O"){
+        if(tablero[0][2] != "X" && tablero[0][2] != "O"){
+            tablero[0][2] = "X";
+        }
     }
-    while((tablero[filaAleatoria][columnaAleatoria] == 'X') || (tablero[filaAleatoria][columnaAleatoria] == 'O'));
+    else if(tablero[0][1] == "O" && tablero[0][2] == "O"){
+        if(tablero[0][0] != "X" && tablero[0][0] != "O"){
+            tablero[0][0] = "X";
+        }
+    }
+    else if((tablero[0][0] == "O" && tablero[0][2] == "O") || (tablero[0][0] == "O" && tablero[0][2] == "O")){
+        if(tablero[0][1] != "X" && tablero[1][0] != "O"){
+            tablero[0][1] = "X";
+        }     
+    }
+    else if(tablero[1][0] == "O" && tablero[1][1] == "O"){
+        if(tablero[1][2] != "X" && tablero[1][2] != "O"){
+            tablero[1][2] = "X";
+        }     
+    }
+    else if(tablero[1][1] == "O" && tablero[1][2] == "O"){
+        if(tablero[1][0] != "X" && tablero[1][0] != "O"){
+            tablero[1][0] = "X";
+        }     
+    }
+    else if((tablero[1][0] == "O" && tablero[1][1] == "O") || (tablero[1][1] == "O" && tablero[1][0] == "O")){
+        if(tablero[1][1] != "X" && tablero[1][1] != "O"){
+            tablero[1][1] = "X";
+        }     
+    }
+    else if(tablero[2][0] == "O" && tablero[2][2] == "O"){
+        if(tablero[2][1] != "X" && tablero[2][1] != "O"){
+            tablero[2][1] = "X";
+        }     
+    }
+    else if(tablero[2][1] == "O" && tablero[2][2] == "O"){
+        if(tablero[2][0] != "X" && tablero[2][0] != "O"){
+            tablero[2][0] = "X";
+        }     
+    }
+    else if((tablero[2][0] == "O" && tablero[2][2] == "O") || (tablero[2][2] == "O" && tablero[2][0] == "O")){
+        if(tablero[2][1] != "X" && tablero[2][1] != "O"){
+            tablero[2][1] = "X";
+        }     
+    }
+    // Analizando columnas
+    else if(tablero[0][0] == "O" && tablero[1][0] == "O"){
+        if(tablero[2][0] != "X" && tablero[2][0] != "O"){
+            tablero[2][0] = "X";
+        } 
+    }
+    else if(tablero[1][0] == "O" && tablero[2][0] == "O"){
+        if(tablero[0][0] != "X" && tablero[0][0] != "O"){
+            tablero[0][0] = "X";
+        } 
+    }
+    else if((tablero[0][0] == "O" && tablero[2][0] == "O") || (tablero[2][0] == "O" && tablero[0][0] == "O")){
+        if(tablero[1][0] != "X" && tablero[1][0] != "O"){
+            tablero[1][0] = "X";
+        }     
+    }
+    else if(tablero[0][1] == "O" && tablero[1][1] == "O"){
+        if(tablero[2][1] != "X" && tablero[2][1] != "O"){
+            tablero[2][1] = "X";
+        } 
+    }
+    else if(tablero[1][1] == "O" && tablero[2][1] == "O"){
+        if(tablero[0][1] != "X" && tablero[0][1] != "O"){
+            tablero[0][1] = "X";
+        } 
+    }
+    else if((tablero[0][1] == "O" && tablero[2][1] == "O") || (tablero[2][1] == "O" && tablero[0][1] == "O")){
+        if(tablero[1][1] != "X" && tablero[1][1] != "O"){
+            tablero[1][1] = "X";
+        }     
+    }
+    else if(tablero[1][2] == "O" && tablero[2][2] == "O"){
+        if(tablero[0][2] != "X" && tablero[0][2] != "O"){
+            tablero[0][2] = "X";
+        } 
+    }
+    else if(tablero[0][2] == "O" && tablero[1][2] == "O"){
+        if(tablero[2][2] != "X" && tablero[2][2] != "O"){
+            tablero[2][2] = "X";
+        } 
+    }
+    else if((tablero[0][2] == "O" && tablero[2][2] == "O") || (tablero[2][2] == "O" && tablero[0][2] == "O")){
+        if(tablero[1][2] != "X" && tablero[1][2] != "O"){
+            tablero[1][2] = "X";
+        }     
+    }
+    // Diagonales
+    else if(tablero[2][2] == "O" && tablero[1][1] == "O"){
+        if(tablero[0][0] != "X" && tablero[0][0] != "O"){
+            tablero[0][0] = "X";
+        } 
+    }
+    else if(tablero[0][0] == "O" && tablero[1][1] == "O"){
+        if(tablero[2][2] != "X" && tablero[2][2] != "O"){
+            tablero[2][2] = "X";
+        } 
+    }
+    else if((tablero[2][2] == "O" && tablero[0][0] == "O") || (tablero[0][0] == "O" && tablero[2][2] == "O")){
+        if(tablero[1][1] != "X" && tablero[1][1] != "O"){
+            tablero[1][1] = "X";
+        }     
+    }
+    else{
+        do{
 
-    tablero[filaAleatoria][columnaAleatoria] = 'X';
-    // bloquear();
+            filaAleatoria = rand() % 3;
+            columnaAleatoria = rand() % 3;
+
+        }
+        while((tablero[filaAleatoria][columnaAleatoria] == "X") || (tablero[filaAleatoria][columnaAleatoria] == "O"));
+
+        tablero[filaAleatoria][columnaAleatoria] = "X";
+    }
+
 }
+
 
 int main(){
     srand(time(NULL));
@@ -102,6 +166,9 @@ int main(){
     int dadoPersona = 0;
     int dadoCompu = 0;
     int turno = 0;
+
+    int filaPosicionUsuario;
+    int columnaPosicionUsuario;
 
     cout<< "\n♧ Ingresar nombre para jugador 1: ";
     cin>> nombrePersona;
@@ -125,7 +192,7 @@ int main(){
         }
         cout<< endl;
     }
-    
+
     //Definiendo quien tendrá el primer turno
     if(dadoPersona > dadoCompu){
         cout<< "\n♧ El primer turno corresponde a "<< nombrePersona<< endl;
@@ -137,36 +204,33 @@ int main(){
     }
 
     for(int i = 0; i < 9; i++){
-        char posicionPersona = '0';
-
         if(turno == 0){
             cout<< "\n♧ Movimiento de "<< nombreComputador<< endl;
             movimientoComputador();
         }
         else if(turno == 1){ // Si el turno es 1, es el turno de la persona
+            bool espacioVacio = true;
 
-            cout<< "\n♧ Ingresa la posición para colocar tu ficha: ";
-            cin>> posicionPersona;
+            do{
+                espacioVacio = true;
 
-            for(int i = 0; i < 3; i++){
-                int espacioVacio = true;
+                cout<< "\n♧ Ingresa la fila de la posición para jugar: ";
+                cin>> filaPosicionUsuario;
 
-                for(int j = 0; j < 3; j++){
-                    if((tablero[i][j] == posicionPersona)){
-                        if((tablero[i][j] == 'X') || (tablero[i][j] == 'O')){
-                            cout<< "♧ Ocupado, escoge otra"<< endl;
-                            espacioVacio = false;
-                            break;
-                        }
-                        else if((tablero[i][j] == posicionPersona) && ((tablero[i][j] != 'X') || (tablero[i][j] != 'O'))){
-                            tablero[i][j] = 'O';
-                            espacioVacio = false;
-                            break;
-                        }
-                    }
+                cout<< "\n♧ Ingresa la columna de la posición para jugar: ";
+                cin>> columnaPosicionUsuario;
+
+                if((tablero[filaPosicionUsuario][columnaPosicionUsuario] == "X") || (tablero[filaPosicionUsuario][columnaPosicionUsuario] == "O")){
+                    cout<< "♧ Ocupado, igresa otra posición "<< endl;
+
+                    espacioVacio = false;
                 }
-                if(!espacioVacio) break;
+                else{
+                    tablero[filaPosicionUsuario][columnaPosicionUsuario] = "O";
+                }
+
             }
+            while(!espacioVacio); // Mientras el espacio no esté vacío, no se terminará de ejeutar
         }
 
         cout<< endl;
