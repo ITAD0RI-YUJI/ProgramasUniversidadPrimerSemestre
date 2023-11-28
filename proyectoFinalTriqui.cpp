@@ -30,38 +30,130 @@ int lanzarDado(){
 }
 
 
-// void movimientoComputador(){
-//     int filaAleatoria;
-//     int columnaAleatoria;
-
-//     do{
-//         filaAleatoria = rand() % 3;
-//         columnaAleatoria = rand() % 3;
-//     }
-//     while((tablero[filaAleatoria][columnaAleatoria] == "X") || (tablero[filaAleatoria][columnaAleatoria] == "O"));
-
-//     tablero[filaAleatoria][columnaAleatoria] = "X";
-// }
-
-void bloquear(int filaAleatoria , int columnaAleatoria){
-
-    
-}
-
-
 void movimientoComputador(){
     int filaAleatoria;
     int columnaAleatoria;
 
-    filaAleatoria = rand() % 3;
-    columnaAleatoria = rand() % 3;
-
-    if((tablero[filaAleatoria][columnaAleatoria] == "X") || (tablero[filaAleatoria][columnaAleatoria] == "O")){
-        bloquear(filaAleatoria , columnaAleatoria);
+    // Analizando filas 
+    if(tablero[0][0] == "O" && tablero[0][1] == "O"){
+        if(tablero[0][2] != "X" && tablero[0][2] != "O"){
+            tablero[0][2] = "X";
+        }
+    }
+    else if(tablero[0][1] == "O" && tablero[0][2] == "O"){
+        if(tablero[0][0] != "X" && tablero[0][0] != "O"){
+            tablero[0][0] = "X";
+        }
+    }
+    else if((tablero[0][0] == "O" && tablero[0][2] == "O") || (tablero[0][0] == "O" && tablero[0][2] == "O")){
+        if(tablero[0][1] != "X" && tablero[1][0] != "O"){
+            tablero[0][1] = "X";
+        }     
+    }
+    else if(tablero[1][0] == "O" && tablero[1][1] == "O"){
+        if(tablero[1][2] != "X" && tablero[1][2] != "O"){
+            tablero[1][2] = "X";
+        }     
+    }
+    else if(tablero[1][1] == "O" && tablero[1][2] == "O"){
+        if(tablero[1][0] != "X" && tablero[1][0] != "O"){
+            tablero[1][0] = "X";
+        }     
+    }
+    else if((tablero[1][0] == "O" && tablero[1][1] == "O") || (tablero[1][1] == "O" && tablero[1][0] == "O")){
+        if(tablero[1][1] != "X" && tablero[1][1] != "O"){
+            tablero[1][1] = "X";
+        }     
+    }
+    else if(tablero[2][0] == "O" && tablero[2][2] == "O"){
+        if(tablero[2][1] != "X" && tablero[2][1] != "O"){
+            tablero[2][1] = "X";
+        }     
+    }
+    else if(tablero[2][1] == "O" && tablero[2][2] == "O"){
+        if(tablero[2][0] != "X" && tablero[2][0] != "O"){
+            tablero[2][0] = "X";
+        }     
+    }
+    else if((tablero[2][0] == "O" && tablero[2][2] == "O") || (tablero[2][2] == "O" && tablero[2][0] == "O")){
+        if(tablero[2][1] != "X" && tablero[2][1] != "O"){
+            tablero[2][1] = "X";
+        }     
+    }
+    // Analizando columnas
+    else if(tablero[0][0] == "O" && tablero[1][0] == "O"){
+        if(tablero[2][0] != "X" && tablero[2][0] != "O"){
+            tablero[2][0] = "X";
+        } 
+    }
+    else if(tablero[1][0] == "O" && tablero[2][0] == "O"){
+        if(tablero[0][0] != "X" && tablero[0][0] != "O"){
+            tablero[0][0] = "X";
+        } 
+    }
+    else if((tablero[0][0] == "O" && tablero[2][0] == "O") || (tablero[2][0] == "O" && tablero[0][0] == "O")){
+        if(tablero[1][0] != "X" && tablero[1][0] != "O"){
+            tablero[1][0] = "X";
+        }     
+    }
+    else if(tablero[0][1] == "O" && tablero[1][1] == "O"){
+        if(tablero[2][1] != "X" && tablero[2][1] != "O"){
+            tablero[2][1] = "X";
+        } 
+    }
+    else if(tablero[1][1] == "O" && tablero[2][1] == "O"){
+        if(tablero[0][1] != "X" && tablero[0][1] != "O"){
+            tablero[0][1] = "X";
+        } 
+    }
+    else if((tablero[0][1] == "O" && tablero[2][1] == "O") || (tablero[2][1] == "O" && tablero[0][1] == "O")){
+        if(tablero[1][1] != "X" && tablero[1][1] != "O"){
+            tablero[1][1] = "X";
+        }     
+    }
+    else if(tablero[1][2] == "O" && tablero[2][2] == "O"){
+        if(tablero[0][2] != "X" && tablero[0][2] != "O"){
+            tablero[0][2] = "X";
+        } 
+    }
+    else if(tablero[0][2] == "O" && tablero[1][2] == "O"){
+        if(tablero[2][2] != "X" && tablero[2][2] != "O"){
+            tablero[2][2] = "X";
+        } 
+    }
+    else if((tablero[0][2] == "O" && tablero[2][2] == "O") || (tablero[2][2] == "O" && tablero[0][2] == "O")){
+        if(tablero[1][2] != "X" && tablero[1][2] != "O"){
+            tablero[1][2] = "X";
+        }     
+    }
+    // Diagonales
+    else if(tablero[2][2] == "O" && tablero[1][1] == "O"){
+        if(tablero[0][0] != "X" && tablero[0][0] != "O"){
+            tablero[0][0] = "X";
+        } 
+    }
+    else if(tablero[0][0] == "O" && tablero[1][1] == "O"){
+        if(tablero[2][2] != "X" && tablero[2][2] != "O"){
+            tablero[2][2] = "X";
+        } 
+    }
+    else if((tablero[2][2] == "O" && tablero[0][0] == "O") || (tablero[0][0] == "O" && tablero[2][2] == "O")){
+        if(tablero[1][1] != "X" && tablero[1][1] != "O"){
+            tablero[1][1] = "X";
+        }     
     }
     else{
+        do{
+
+            filaAleatoria = rand() % 3;
+            columnaAleatoria = rand() % 3;
+
+        }
+        while((tablero[filaAleatoria][columnaAleatoria] == "X") || (tablero[filaAleatoria][columnaAleatoria] == "O"));
+
         tablero[filaAleatoria][columnaAleatoria] = "X";
     }
+
 }
 
 
